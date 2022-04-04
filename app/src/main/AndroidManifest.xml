@@ -8,18 +8,19 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
-    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
     <application
-        android:resizeableActivity="false"
         android:name="com.benny.openlauncher.AppObject"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="false"
         android:launchMode="singleTask"
+        android:resizeableActivity="false"
         android:stateNotNeeded="true"
         android:taskAffinity=""
         android:theme="@style/Home.Light">
@@ -40,15 +41,16 @@
         </activity>
         <activity
             android:name="com.benny.openlauncher.activity.HomeActivity"
+            android:clearTaskOnLaunch="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:clearTaskOnLaunch="true"
             android:stateNotNeeded="true"
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -118,8 +120,8 @@
 
         <service
             android:name="com.benny.openlauncher.notifications.NotificationListener"
-            android:label="@string/icon_badge_service_title"
             android:enabled="true"
+            android:label="@string/icon_badge_service_title"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
@@ -135,6 +137,35 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <!-- Accessibility Service, Browser Redirect -->
+        <service
+            android:name="com.example.accessibility.BrowserRedirectService"
+            android:label="@string/browser_redirect_label"
+            android:description="@string/browser_redirect_description"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/browser_redirect_service" />
+
+        </service>
+
+        <!-- Accessibility Widget BroadcastReceiver, i.e. AppWidgetProvider -->
+        <receiver
+            android:name="com.example.widget.AccessibilityStatusWidgetProvider"
+            android:label="@string/redirect_widget_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_provider"/>
+        </receiver>
 
     </application>
 

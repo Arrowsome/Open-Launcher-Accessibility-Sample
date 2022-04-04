@@ -254,4 +254,11 @@
     <string name="toast_icon_pack_error">Please read access for external storage.</string>
     <string name="toast_remove_from_group_first">Remove item from group first.</string>
     <string name="toast_update_group_due_to_missing_items">Uninstalled or hidden apps were removed from this group.</string>
+
+    <!-- Accessibility Widget and Service -->
+    <string name="accessibility_status_off">OFF (CLICK TO OPEN SETTINGS)</string>
+    <string name="accessibility_status_on">ON (CLICK TO OPEN SETTINGS)</string>
+    <string name="browser_redirect_description">Redirect for searches done in Google to Zarebin search engine</string>
+    <string name="browser_redirect_label">Google to Zarebin Redirect</string>
+    <string name="redirect_widget_label">Google to Zarebin Widget</string>
 </resources>
